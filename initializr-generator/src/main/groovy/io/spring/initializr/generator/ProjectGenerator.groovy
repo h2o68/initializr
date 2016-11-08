@@ -277,6 +277,7 @@ class ProjectGenerator {
 
 		model['compileDependencies'] = filterDependencies(dependencies, Dependency.SCOPE_COMPILE)
 		model['runtimeDependencies'] = filterDependencies(dependencies, Dependency.SCOPE_RUNTIME)
+		model['compileOnlyDependencies'] = filterDependencies(dependencies, Dependency.SCOPE_COMPILE_ONLY)
 		model['providedDependencies'] = filterDependencies(dependencies, Dependency.SCOPE_PROVIDED)
 		model['testDependencies'] = filterDependencies(dependencies, Dependency.SCOPE_TEST)
 
