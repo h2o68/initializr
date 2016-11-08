@@ -20,6 +20,7 @@ import groovy.util.logging.Slf4j
 import io.spring.initializr.InitializrException
 import io.spring.initializr.metadata.Dependency
 import io.spring.initializr.metadata.InitializrMetadataProvider
+import io.spring.initializr.metadata.Module
 import io.spring.initializr.util.Agent
 import io.spring.initializr.util.GroovyTemplate
 import io.spring.initializr.util.Version
@@ -109,6 +110,23 @@ class ProjectGenerator {
 			throw ex
 		}
 	}
+	
+	/**
+	 * Generate a multiple module Maven project
+	 */
+	
+	File generateMultipleModuleProjectStructure(MultipleModuleProjectRequest request) {
+		def rootDir = File.createTempFile('tmp', '', new File(tmpdir))
+		doGenerateProjectStructure(request.parent, rootDir);
+		
+		request.children.each { c->
+			def moduleDir = new File(rootDir, c.name)
+			moduleDir.mkdir()
+			doGenerateProjectStructure(c, moduleDir)
+		}
+		
+		rootDir
+	}
 
 	/**
 	 * Generate a project structure for the specified {@link ProjectRequest}. Returns
@@ -116,17 +134,17 @@ class ProjectGenerator {
 	 */
 	File generateProjectStructure(ProjectRequest request) {
 		try {
-			doGenerateProjectStructure(request)
+			def rootDir = File.createTempFile('tmp', '', new File(tmpdir))
+			doGenerateProjectStructure(request, rootDir)
 		} catch (InitializrException ex) {
 			publishProjectFailedEvent(request, ex)
 			throw ex
 		}
 	}
 
-	protected File doGenerateProjectStructure(ProjectRequest request) {
+	protected File doGenerateProjectStructure(ProjectRequest request, File rootDir) {
 		def model = resolveModel(request)
 
-		def rootDir = File.createTempFile('tmp', '', new File(tmpdir))
 		addTempFile(rootDir.name, rootDir)
 		rootDir.delete()
 		rootDir.mkdirs()
@@ -292,6 +310,18 @@ class ProjectGenerator {
 
 		// Append the project request to the model
 		request.properties.each { model[it.key] = it.value }
+		
+		// Add modules
+		// TODO
+		def module = new Module()
+		module.name = "hermes"
+		request.modules.add(module)
+		
+		def modules = []
+		request.modules.each {
+			m -> modules.add(m)
+		}
+		model['modules'] = modules
 
 		model
 	}
@@ -365,6 +395,7 @@ class ProjectGenerator {
 	}
 
 	private void writeMavenWrapper(File dir) {
+		/*
 		writeTextResource(dir, 'mvnw.cmd', 'maven/mvnw.cmd')
 		writeTextResource(dir, 'mvnw', 'maven/mvnw')
 
@@ -374,6 +405,7 @@ class ProjectGenerator {
 				'maven/wrapper/maven-wrapper.properties')
 		writeBinaryResource(wrapperDir, 'maven-wrapper.jar',
 				'maven/wrapper/maven-wrapper.jar')
+		*/
 	}
 
 	private File writeBinaryResource(File dir, String name, String location) {

@@ -123,16 +123,16 @@ class InitializrMetadataBuilder {
 	 */
 	protected applyDefaults(InitializrMetadata metadata) {
 		if (!metadata.name.content) {
-			metadata.name.content = 'demo'
+			metadata.name.content = 'itrocks'
 		}
 		if (!metadata.description.content) {
-			metadata.description.content = 'Demo project for Spring Boot'
+			metadata.description.content = 'Skeleton Java Project for Ctrip'
 		}
 		if (!metadata.groupId.content) {
-			metadata.groupId.content = 'com.example'
+			metadata.groupId.content = 'com.ctrip.bu'
 		}
 		if (!metadata.version.content) {
-			metadata.version.content = '0.0.1-SNAPSHOT'
+			metadata.version.content = '1.0.0'
 		}
 	}
 

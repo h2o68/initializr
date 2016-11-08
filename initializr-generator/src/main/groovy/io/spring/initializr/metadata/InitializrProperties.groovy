@@ -69,7 +69,7 @@ class InitializrProperties extends InitializrConfiguration {
 	 * GroupId meta-data.
 	 */
 	@JsonIgnore
-	final SimpleElement groupId = new SimpleElement(value: 'com.example')
+	final SimpleElement groupId = new SimpleElement(value: 'com.ctrip.bu')
 
 	/**
 	 * ArtifactId meta-data.
@@ -81,19 +81,19 @@ class InitializrProperties extends InitializrConfiguration {
 	 * Version meta-data.
 	 */
 	@JsonIgnore
-	final SimpleElement version = new SimpleElement(value: '0.0.1-SNAPSHOT')
+	final SimpleElement version = new SimpleElement(value: '1.0.0')
 
 	/**
 	 * Name meta-data.
 	 */
 	@JsonIgnore
-	final SimpleElement name = new SimpleElement(value: 'demo')
+	final SimpleElement name = new SimpleElement(value: 'itrocks')
 
 	/**
 	 * Description meta-data.
 	 */
 	@JsonIgnore
-	final SimpleElement description = new SimpleElement(value: 'Demo project for Spring Boot')
+	final SimpleElement description = new SimpleElement(value: 'Skeleton Java Project for Ctrip')
 
 	/**
 	 * Package name meta-data.

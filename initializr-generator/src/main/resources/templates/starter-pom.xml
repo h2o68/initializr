@@ -22,6 +22,12 @@
 		<${it.key}>${it.value()}</${it.key}><% } %><%buildProperties.versions.each { %>
 		<${it.key}>${it.value()}</${it.key}><%}%>
 	</properties>
+	
+<% if (modules.size() > 0) { %>
+	<modules><% modules.each { %>
+		<module>${it.name}</module><% } %>
+	</modules>
+<% } %>
 
 	<dependencies><% compileDependencies.each { %>
 		<dependency>

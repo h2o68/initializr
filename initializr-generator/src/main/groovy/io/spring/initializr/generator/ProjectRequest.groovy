@@ -16,11 +16,14 @@
 
 package io.spring.initializr.generator
 
+import java.util.List;
+
 import groovy.transform.ToString
 import groovy.util.logging.Slf4j
 import io.spring.initializr.metadata.BillOfMaterials
 import io.spring.initializr.metadata.Dependency
 import io.spring.initializr.metadata.InitializrMetadata
+import io.spring.initializr.metadata.Module
 import io.spring.initializr.metadata.Repository
 import io.spring.initializr.metadata.Type
 import io.spring.initializr.util.Version
@@ -61,7 +64,14 @@ class ProjectRequest extends BasicProjectRequest {
 
 	def facets = []
 	def build
-
+	
+	/**
+	 * Modules.
+	 */
+	final List<Module> modules = []
+	
+	List<String> test = []
+	
 	/**
 	 * Initializes this instance with the defaults defined in the specified {@link InitializrMetadata}.
 	 */

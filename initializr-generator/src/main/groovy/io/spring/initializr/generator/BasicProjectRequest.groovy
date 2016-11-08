@@ -16,6 +16,8 @@
 
 package io.spring.initializr.generator
 
+import java.util.List;
+
 /**
  * The base settings of a project request. Only these can be bound by user's
  * input.
@@ -42,5 +44,5 @@ class BasicProjectRequest {
 
 	// The base directory to create in the archive - no baseDir by default
 	String baseDir
-
+	
 }

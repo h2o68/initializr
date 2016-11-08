@@ -88,7 +88,7 @@ class MainController extends AbstractInitializrController {
 		request.initialize(metadataProvider.get())
 		request
 	}
-
+	
 	@RequestMapping(value = "/metadata/config", produces = ["application/json"])
 	@ResponseBody
 	InitializrMetadata config() {
@@ -213,6 +213,7 @@ class MainController extends AbstractInitializrController {
 	@ResponseBody
 	ResponseEntity<byte[]> springZip(BasicProjectRequest basicRequest) {
 		ProjectRequest request = (ProjectRequest) basicRequest
+		log.info("${request.test}")
 		def dir = projectGenerator.generateProjectStructure(request)
 
 		def download = projectGenerator.createDistributionFile(dir, '.zip')
